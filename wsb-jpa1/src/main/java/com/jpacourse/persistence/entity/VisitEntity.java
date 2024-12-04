@@ -46,4 +46,14 @@ public class VisitEntity {
 		this.time = time;
 	}
 
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@JoinColumn(name = "patient_id", nullable = false) // Klucz obcy w tabeli VISIT
+	private PatientEntity patient;
+	// One-sided relationship from the child side (child owns the relationship).
+
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@JoinColumn(name = "doctor_id", nullable = false) // Klucz obcy w tabeli VISIT
+	private DoctorEntity doctor;
+	// One-sided relationship from the child side (child owns the relationship).
+
 }
