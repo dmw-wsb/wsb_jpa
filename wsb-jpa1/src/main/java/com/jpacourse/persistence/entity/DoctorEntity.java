@@ -92,5 +92,9 @@ public class DoctorEntity {
 	public void setSpecialization(Specialization specialization) {
 		this.specialization = specialization;
 	}
+	
+	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+	private List<VisitEntity> visits;
+	// Bidirectional relationship.
 
 }
