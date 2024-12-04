@@ -89,5 +89,14 @@ public class PatientEntity {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
+	
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id") // Klucz obcy w tabeli PATIENT
+	private AddressEntity address;
+	// One-sided relationship from the parent side (parent owns the relationship).
+
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
+	private List<VisitEntity> visits;
+	// Bidirectional relationship
 
 }
