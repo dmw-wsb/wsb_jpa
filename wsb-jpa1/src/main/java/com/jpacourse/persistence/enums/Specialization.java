@@ -3,8 +3,14 @@ package com.jpacourse.persistence.enums;
 public enum Specialization {
 
 	SURGEON,
-	GP,
 	DERMATOLOGIST,
-	OCULIST
+	OCULIST,
+	GENERAL_MEDICINE,
+	PSYCHIATRY,
+	ORTHOPEDICS,
+	NEUROLOGIST,
+	RADIOLOGIST,
+	CARDIOLOGIST,
+	PEDIATRICS
 
 }
