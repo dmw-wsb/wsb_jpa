@@ -1,12 +1,18 @@
 package com.jpacourse.persistence.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,14 +32,23 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String telephoneNumber;
 
+	@Column(nullable = true) // Optional, remove nullable if it's mandatory
 	private String email;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String patientNumber;
 
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
+	@OneToOne(optional = true, cascade = CascadeType.ALL)
+	@JoinColumn(name = "address_id", referencedColumnName = "id") // Foreign key in the PATIENT table
+	private AddressEntity address;
+
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<VisitEntity> visits = new ArrayList<>(); // Initialized to prevent null pointer issues
+
+	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -89,14 +104,20 @@ public class PatientEntity {
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-	
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id") // Klucz obcy w tabeli PATIENT
-	private AddressEntity address;
-	// One-sided relationship from the parent side (parent owns the relationship).
 
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-	private List<VisitEntity> visits;
-	// Bidirectional relationship
+	public AddressEntity getAddress() {
+		return address;
+	}
 
+	public void setAddress(AddressEntity address) {
+		this.address = address;
+	}
+
+	public List<VisitEntity> getVisits() {
+		return visits;
+	}
+
+	public void setVisits(List<VisitEntity> visits) {
+		this.visits = visits;
+	}
 }
