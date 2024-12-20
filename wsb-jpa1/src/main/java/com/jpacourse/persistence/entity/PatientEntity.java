@@ -3,17 +3,7 @@ package com.jpacourse.persistence.entity;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "PATIENT")
@@ -32,8 +22,11 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String telephoneNumber;
 
-	@Column(nullable = true) // Optional, remove nullable if it's mandatory
+	@Column
 	private String email;
+
+	@Column(nullable = false)
+	private Boolean isInsured;
 
 	@Column(nullable = false, unique = true)
 	private String patientNumber;
@@ -41,14 +34,14 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
-	@OneToOne(optional = true, cascade = CascadeType.ALL)
-	@JoinColumn(name = "address_id", referencedColumnName = "id") // Foreign key in the PATIENT table
+	@OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@JoinColumn(name = "address_id", referencedColumnName = "id")
 	private AddressEntity address;
 
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<VisitEntity> visits = new ArrayList<>(); // Initialized to prevent null pointer issues
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	private List<VisitEntity> visits = new ArrayList<>();
 
-	// Getters and Setters
+	// Standard getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -103,6 +96,14 @@ public class PatientEntity {
 
 	public void setDateOfBirth(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public Boolean getIsInsured() {
+		return isInsured;
+	}
+
+	public void setIsInsured(Boolean isInsured) {
+		this.isInsured = isInsured;
 	}
 
 	public AddressEntity getAddress() {

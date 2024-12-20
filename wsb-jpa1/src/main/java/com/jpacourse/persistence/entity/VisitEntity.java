@@ -1,16 +1,8 @@
 package com.jpacourse.persistence.entity;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
-
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "VISIT")
@@ -26,15 +18,16 @@ public class VisitEntity {
 	@Column(nullable = false)
 	private LocalDateTime time;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "patient_id", nullable = false) // Foreign key in the VISIT table
+	@ManyToOne
+	@JoinColumn(name = "patient_id", nullable = false)
 	private PatientEntity patient;
-	// Unidirectional relationship from the child side (Visit -> Patient).
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
-	@JoinColumn(name = "doctor_id", nullable = false) // Foreign key in the VISIT table
+	@ManyToOne
+	@JoinColumn(name = "doctor_id", nullable = false)
 	private DoctorEntity doctor;
-	// Unidirectional relationship from the child side (Visit -> Doctor).
+
+	@OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private List<MedicalTreatmentEntity> medicalTreatments;
 
 	// Getters and Setters
 	public Long getId() {
@@ -75,5 +68,13 @@ public class VisitEntity {
 
 	public void setDoctor(DoctorEntity doctor) {
 		this.doctor = doctor;
+	}
+
+	public List<MedicalTreatmentEntity> getMedicalTreatments() {
+		return medicalTreatments;
+	}
+
+	public void setMedicalTreatments(List<MedicalTreatmentEntity> medicalTreatments) {
+		this.medicalTreatments = medicalTreatments;
 	}
 }
