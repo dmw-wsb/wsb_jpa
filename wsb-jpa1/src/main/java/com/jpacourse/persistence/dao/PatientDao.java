@@ -1,10 +1,17 @@
 package com.jpacourse.persistence.dao;
 
 import com.jpacourse.persistence.entity.PatientEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import com.jpacourse.persistence.enums.Gender;
 
-@Repository
-public interface PatientDao extends JpaRepository<PatientEntity, Long> {
-    // You can add custom query methods here if needed
+import java.time.LocalDateTime;
+import java.util.List;
+
+public interface PatientDao extends Dao<PatientEntity, Long> {
+    void addVisit(long patientId, long doctorId, LocalDateTime time, String description);
+
+    List<PatientEntity> findByLastName(String lastName);
+
+    List<PatientEntity> findWithMoreVisits(long visitCount);
+
+    List<PatientEntity> findByGender(Gender g);
 }

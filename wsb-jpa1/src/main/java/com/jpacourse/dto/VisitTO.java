@@ -1,45 +1,103 @@
 package com.jpacourse.dto;
 
+import com.jpacourse.persistence.enums.TreatmentType;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.PastOrPresent;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-public class VisitTO {
-    @NotNull
-    @PastOrPresent(message = "Visit time must be in the past or present.")
-    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
-    private LocalDateTime visitTime;
+public class VisitTO implements Serializable {
 
-    @NotBlank(message = "Doctor name is required.")
-    private String doctorName;
+    @NotNull(message = "Visit time cannot be null")
+    private LocalDateTime time;
 
-    private List<String> treatmentTypes; // Considered non-nullable for this example
+    @NotBlank(message = "Doctor's first name cannot be blank")
+    private String doctorFirstName;
 
-    public LocalDateTime getVisitTime() {
-        return visitTime;
+    @NotBlank(message = "Doctor's last name cannot be blank")
+    private String doctorLastName;
+
+    @NotNull(message = "Treatment types cannot be null")
+    private List<TreatmentType> type;
+
+    // No-args constructor
+    public VisitTO() {
     }
 
-    public void setVisitTime(LocalDateTime visitTime) {
-        this.visitTime = visitTime;
+    // Constructor with all fields
+    public VisitTO(LocalDateTime time, String doctorFirstName, String doctorLastName, List<TreatmentType> type) {
+        this.time = time;
+        this.doctorFirstName = doctorFirstName;
+        this.doctorLastName = doctorLastName;
+        this.type = type;
     }
 
-    public String getDoctorName() {
-        return doctorName;
+    // Getters and Setters
+    public LocalDateTime getTime() {
+        return time;
     }
 
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setTime(LocalDateTime time) {
+        this.time = time;
     }
 
-    public List<String> getTreatmentTypes() {
-        return treatmentTypes != null ? Collections.unmodifiableList(treatmentTypes) : Collections.emptyList();
+    public String getDoctorFirstName() {
+        return doctorFirstName;
     }
 
-    public void setTreatmentTypes(List<String> treatmentTypes) {
-        this.treatmentTypes = treatmentTypes; // Handling immutability can be done here if needed.
+    public void setDoctorFirstName(String doctorFirstName) {
+        this.doctorFirstName = doctorFirstName;
+    }
+
+    public String getDoctorLastName() {
+        return doctorLastName;
+    }
+
+    public void setDoctorLastName(String doctorLastName) {
+        this.doctorLastName = doctorLastName;
+    }
+
+    public List<TreatmentType> getType() {
+        return type != null ? Collections.unmodifiableList(type) : Collections.emptyList();
+    }
+
+    public void setType(List<TreatmentType> type) {
+        this.type = type;
+    }
+
+    // Overrides for toString, equals, and hashCode
+    @Override
+    public String toString() {
+        return "VisitTO{" +
+                "time=" + time +
+                ", doctorFirstName='" + doctorFirstName + '\'' +
+                ", doctorLastName='" + doctorLastName + '\'' +
+                ", type=" + type +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        VisitTO visitTO = (VisitTO) o;
+
+        if (!time.equals(visitTO.time)) return false;
+        if (!doctorFirstName.equals(visitTO.doctorFirstName)) return false;
+        if (!doctorLastName.equals(visitTO.doctorLastName)) return false;
+        return type != null ? type.equals(visitTO.type) : visitTO.type == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = time.hashCode();
+        result = 31 * result + doctorFirstName.hashCode();
+        result = 31 * result + doctorLastName.hashCode();
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
     }
 }

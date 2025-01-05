@@ -1,49 +1,62 @@
-package com.jpacourse.persistence.dao;
+package com.jpacourse.persistance.dao;
 
-import com.jpacourse.persistence.entity.DoctorEntity;
+import com.jpacourse.persistence.dao.PatientDao;
 import com.jpacourse.persistence.entity.PatientEntity;
 import com.jpacourse.persistence.entity.VisitEntity;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@DataJpaTest
-public class PatientDaoTest {
-
-    @Autowired
-    private TestEntityManager entityManager;
-
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class PatientDaoTest
+{
     @Autowired
     private PatientDao patientDao;
 
+    @Transactional
     @Test
-    void testAddVisitToPatient() {
-        // Given
-        PatientEntity patient = new PatientEntity();
-        patient.setFirstName("John");
-        patient.setLastName("Doe");
-        patient = entityManager.persistFlushFind(patient);
+    public void testShouldUpdateVisitEntity() {
+        // given
 
-        DoctorEntity doctor = new DoctorEntity();
-        doctor.setFirstName("Jane");
-        doctor.setLastName("Smith");
-        doctor = entityManager.persistFlushFind(doctor);
+        // use existing data
+        long patientId = 1L;
+        long doctorId = 1L;
+        LocalDateTime visitTime = LocalDate.parse("2024-12-30").atTime(10,15,25);
+        String visitDesc = "FakeVisitDescription";
 
-        LocalDateTime visitDate = LocalDateTime.now();
-        String description = "Routine check-up";
+        // assert state before update
+        final List<VisitEntity> visitsBeforeUpdate = patientDao.getOne(patientId).getVisits();
+        int patientVisitsBefore = visitsBeforeUpdate.size();
+        assertThat(visitsBeforeUpdate.stream()
+                .noneMatch(visit -> visit.getDescription().equals(visitDesc)))
+                .isTrue();
 
-        // When
-        patientDao.addVisitToPatient(patient.getId(), doctor.getId(), visitDate, description);
+        // when
+        patientDao.addVisit(
+                patientId,
+                doctorId,
+                visitTime,
+                visitDesc
+        );
 
-        // Then
-        entityManager.flush();  // Ensures all pending changes are applied to the database
-        PatientEntity fetchedPatient = patientDao.findById(patient.getId()).orElseThrow();
-        assertThat(fetchedPatient.getVisits()).isNotEmpty();
-        assertThat(fetchedPatient.getVisits().get(0).getDescription()).isEqualTo(description);
+        // then
+        PatientEntity updatedPatient = patientDao.getOne(patientId);
+
+        assertThat(updatedPatient.getVisits().size()).isEqualTo(patientVisitsBefore+1);
+        assertThat(patientDao.getOne(patientId)
+                .getVisits().stream()
+                .filter(visit -> visit.getDescription().equals(visitDesc)).count())
+                .isEqualTo(1);
+
     }
 }

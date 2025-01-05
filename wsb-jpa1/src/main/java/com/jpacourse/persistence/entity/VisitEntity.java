@@ -1,8 +1,9 @@
 package com.jpacourse.persistence.entity;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Collection;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "VISIT")
@@ -18,18 +19,20 @@ public class VisitEntity {
 	@Column(nullable = false)
 	private LocalDateTime time;
 
+	//  relacja dwustronna
 	@ManyToOne
-	@JoinColumn(name = "patient_id", nullable = false)
-	private PatientEntity patient;
-
-	@ManyToOne
-	@JoinColumn(name = "doctor_id", nullable = false)
 	private DoctorEntity doctor;
 
-	@OneToMany(mappedBy = "visit", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private List<MedicalTreatmentEntity> medicalTreatments;
+	//  relacja dwustronna
+	@ManyToOne
+	private PatientEntity patient;
 
-	// Getters and Setters
+	// relacja dwustronna - zabieg wie z jakiej wizyty pochodzi,
+	// ale wizyta nie zna wszystkich zabiegów
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "VISIT_ID")
+	private Collection<MedicalTreatmentEntity> treatments;
+
 	public Long getId() {
 		return id;
 	}
@@ -70,11 +73,11 @@ public class VisitEntity {
 		this.doctor = doctor;
 	}
 
-	public List<MedicalTreatmentEntity> getMedicalTreatments() {
-		return medicalTreatments;
+	public Collection<MedicalTreatmentEntity> getTreatments() {
+		return treatments;
 	}
 
-	public void setMedicalTreatments(List<MedicalTreatmentEntity> medicalTreatments) {
-		this.medicalTreatments = medicalTreatments;
+	public void setTreatments(Collection<MedicalTreatmentEntity> treatments) {
+		this.treatments = treatments;
 	}
 }

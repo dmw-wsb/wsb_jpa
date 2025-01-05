@@ -1,10 +1,7 @@
 package com.jpacourse.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -14,10 +11,26 @@ public class AddressEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	@Column(nullable = false)
 	private String city;
+
+	@Column(nullable = false)
 	private String addressLine1;
+
+	@Column(nullable = false)
 	private String addressLine2;
+
+	@Column(nullable = false)
 	private String postalCode;
+
+	//	relacje jednostronne - adres nie wie kto pod nim mieszka, ale osoby wiedzą gdzie mieszkają
+	//  jednostronne ponieważ użyto mappedBy dla OneToOne - tylko pomoc dla kompilatora,
+	//  tych zmiennych tu "nie powinno być"
+	@OneToOne(mappedBy = "address")
+	private DoctorEntity doctorResident;
+
+	@OneToOne(mappedBy = "address")
+	private PatientEntity patientResident;
 
 	public Long getId() {
 		return id;
@@ -59,4 +72,20 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
+
+	public DoctorEntity getDoctorResident() {
+		return doctorResident;
+	}
+
+	public void setDoctorResident(DoctorEntity doctorResident) {
+		this.doctorResident = doctorResident;
+	}
+
+	public PatientEntity getPatientResident() {
+		return patientResident;
+	}
+
+	public void setPatientResident(PatientEntity patientResident) {
+		this.patientResident = patientResident;
+	}
 }

@@ -1,8 +1,11 @@
 package com.jpacourse.persistence.entity;
 
+import com.jpacourse.persistence.enums.Gender;
+
 import java.time.LocalDate;
-import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -22,26 +25,28 @@ public class PatientEntity {
 	@Column(nullable = false)
 	private String telephoneNumber;
 
-	@Column
+	@Column(nullable = false)
 	private String email;
 
 	@Column(nullable = false)
-	private Boolean isInsured;
-
-	@Column(nullable = false, unique = true)
 	private String patientNumber;
 
 	@Column(nullable = false)
 	private LocalDate dateOfBirth;
 
-	@OneToOne(optional = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "address_id", referencedColumnName = "id")
+	@Column(nullable = false)
+	@Enumerated(EnumType.STRING)
+	private Gender gender;
+
+	//  relacja dwustronna
+	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+//	@JoinColumn(name = "PATIENT_ID")
+	private List<VisitEntity> visits;
+
+	//	relacje jednostronna - adres nie wie kto pod nim mieszka, ale osoby wiedzą gdzie mieszkają
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private AddressEntity address;
 
-	@OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-	private List<VisitEntity> visits = new ArrayList<>();
-
-	// Standard getters and setters
 	public Long getId() {
 		return id;
 	}
@@ -98,20 +103,20 @@ public class PatientEntity {
 		this.dateOfBirth = dateOfBirth;
 	}
 
-	public Boolean getIsInsured() {
-		return isInsured;
-	}
-
-	public void setIsInsured(Boolean isInsured) {
-		this.isInsured = isInsured;
-	}
-
 	public AddressEntity getAddress() {
 		return address;
 	}
 
 	public void setAddress(AddressEntity address) {
 		this.address = address;
+	}
+
+	public Gender getGender() {
+		return gender;
+	}
+
+	public void setGender(Gender gender) {
+		this.gender = gender;
 	}
 
 	public List<VisitEntity> getVisits() {
