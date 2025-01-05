@@ -1,110 +1,50 @@
--- Address data
-INSERT INTO address (id, address_line1, address_line2, city, postal_code) VALUES
-(1, 'Street 1', 'Apt 1', 'City A', '62-001'),
-(2, 'Street 2', 'Apt 10', 'City B', '62-002'),
-(3, 'Street 3', 'Apt 5', 'City C', '62-003'),
-(4, 'Street 4', 'Apt 4', 'City D', '62-004'),
-(5, 'Street 5', 'Apt 16', 'City E', '62-005'),
-(6, 'Street 6', 'Apt 6', 'City F', '62-006'),
-(7, 'Street 7', 'Apt 8', 'City G', '62-007'),
-(8, 'Street 8', 'Apt 2', 'City H', '62-008'),
-(9, 'Street 9', 'Apt 12', 'City I', '62-009'),
-(10, 'Street 10', 'Apt 20', 'City J', '62-010');
-(11, 'Street 11', 'Apt 3', 'City K', '63-011'),
-(12, 'Street 12', 'Apt 15', 'City L', '63-012'),
-(13, 'Street 13', 'Apt 7', 'City M', '63-013'),
-(14, 'Street 14', 'Apt 22', 'City N', '63-014'),
-(15, 'Street 15', 'Apt 9', 'City O', '63-015'),
-(16, 'Street 16', 'Apt 14', 'City P', '63-016'),
-(17, 'Street 17', 'Apt 6', 'City Q', '63-017'),
-(18, 'Street 18', 'Apt 4', 'City R', '63-018'),
-(19, 'Street 19', 'Apt 11', 'City S', '63-019'),
-(20, 'Street 20', 'Apt 17', 'City T', '63-020');
--- Patient data
-INSERT INTO patient (id, date_of_birth, email, first_name, last_name, patient_number, telephone_number, address_id) VALUES
-(1, '1985-01-01', 'john.doe@example.com', 'John', 'Doe', 'P12345', '123456789', 1),
-(2, '1990-01-01', 'jane.smith@example.com', 'Jane', 'Smith', 'P67890', '845761234', 2),
-(3, '1978-07-12', 'paul.jones@example.com', 'Paul', 'Jones', 'P11111', '345612351', 3),
-(4, '1989-04-25', 'emma.white@example.com', 'Emma', 'White', 'P22222', '437858643', 4),
-(5, '1995-11-15', 'olivia.brown@example.com', 'Olivia', 'Brown', 'P33333', '184653212', 5),
-(6, '1980-03-30', 'michael.green@example.com', 'Michael', 'Green', 'P44444', '234567890', 6),
-(7, '1992-08-10', 'sophia.adams@example.com', 'Sophia', 'Adams', 'P55555', '134728763', 7),
-(8, '1987-12-22', 'liam.wilson@example.com', 'Liam', 'Wilson', 'P66666', '965375324', 8),
-(9, '1994-05-18', 'mia.harris@example.com', 'Mia', 'Harris', 'P77777', '632463426', 9),
-(10, '1982-09-05', 'noah.clark@example.com', 'Noah', 'Clark', 'P88888', '457853252', 10);
-(11, '1983-11-11', 'chris.lee@example.com', 'Chris', 'Lee', 'P99999', '132456789', 11),
-(12, '1991-12-12', 'lucas.kim@example.com', 'Lucas', 'Kim', 'P10000', '234567890', 12),
-(13, '1979-01-13', 'anna.park@example.com', 'Anna', 'Park', 'P11112', '345678901', 13),
-(14, '1988-02-14', 'mark.choi@example.com', 'Mark', 'Choi', 'P22223', '456789012', 14),
-(15, '1993-03-15', 'natalie.smith@example.com', 'Natalie', 'Smith', 'P33334', '567890123', 15),
-(16, '1981-04-16', 'robert.white@example.com', 'Robert', 'White', 'P44445', '678901234', 16),
-(17, '1990-05-17', 'elena.keller@example.com', 'Elena', 'Keller', 'P55556', '789012345', 17),
-(18, '1986-06-18', 'harry.brown@example.com', 'Harry', 'Brown', 'P66667', '890123456', 18),
-(19, '1992-07-19', 'oliver.stone@example.com', 'Oliver', 'Stone', 'P77778', '901234567', 19),
-(20, '1984-08-20', 'emily.green@example.com', 'Emily', 'Green', 'P88889', '123450987', 20);
--- Doctor data
-INSERT INTO doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization) VALUES
-(1, 'Emily', 'Johnson', '111111111', 'emily.johnson@example.com', 'D0001', 'CARDIOLOGIST'),
-(2, 'James', 'Brown', '222222222', 'james.brown@example.com', 'D0002', 'DERMATOLOGIST'),
-(3, 'Sophia', 'Miller', '333333333', 'sophia.miller@example.com', 'D0003', 'NEUROLOGIST'),
-(4, 'Olivia', 'Davis', '444444444', 'olivia.davis@example.com', 'D0004', 'PEDIATRICS'),
-(5, 'Michael', 'Martinez', '555555555', 'michael.martinez@example.com', 'D0005', 'OCULIST'),
-(6, 'Isabella', 'Garcia', '666666666', 'isabella.garcia@example.com', 'D0006', 'RADIOLOGIST'),
-(7, 'Liam', 'Rodriguez', '777777777', 'liam.rodriguez@example.com', 'D0007', 'ORTHOPEDICS'),
-(8, 'Noah', 'Wilson', '888888888', 'noah.wilson@example.com', 'D0008', 'PSYCHIATRY'),
-(9, 'Emma', 'Taylor', '999999999', 'emma.taylor@example.com', 'D0009', 'GENERAL_MEDICINE'),
-(10, 'Ava', 'Anderson', '000000000', 'ava.anderson@example.com', 'D0010', 'SURGEON');
-(11, 'Henry', 'Clark', '123450001', 'henry.clark@example.com', 'D0011', 'DERMATOLOGIST'),
-(12, 'Sarah', 'Miller', '223450002', 'sarah.miller@example.com', 'D0012', 'CARDIOLOGIST'),
-(13, 'Julia', 'Adams', '333450003', 'julia.adams@example.com', 'D0013', 'NEUROLOGIST'),
-(14, 'Max', 'Cooper', '443450004', 'max.cooper@example.com', 'D0014', 'SURGEON'),
-(15, 'Ethan', 'Wright', '553450005', 'ethan.wright@example.com', 'D0015', 'RADIOLOGIST'),
-(16, 'Isabella', 'Scott', '663450006', 'isabella.scott@example.com', 'D0016', 'PEDIATRICS'),
-(17, 'Ryan', 'Taylor', '773450007', 'ryan.taylor@example.com', 'D0017', 'ORTHOPEDICS'),
-(18, 'Sophia', 'Turner', '883450008', 'sophia.turner@example.com', 'D0018', 'PSYCHIATRY'),
-(19, 'Nathan', 'Roberts', '993450009', 'nathan.roberts@example.com', 'D0019', 'GENERAL_MEDICINE'),
-(20, 'Ella', 'Brooks', '003450010', 'ella.brooks@example.com', 'D0020', 'OCULIST');
--- Visit data
-INSERT INTO visit (id, description, time, patient_id, doctor_id) VALUES
-(1, 'Routine check-up', '2024-12-01T10:00:00', 1, 1),
-(2, 'Follow-up for surgery', '2024-12-02T11:00:00', 2, 2),
-(3, 'Dermatology consultation', '2024-12-03T09:30:00', 3, 3),
-(4, 'Neurology examination', '2024-12-04T14:00:00', 4, 4),
-(5, 'Cardiology check-up', '2024-12-05T13:00:00', 5, 5),
-(6, 'Pediatric consultation', '2024-12-06T15:00:00', 6, 6),
-(7, 'Orthopedics appointment', '2024-12-07T08:30:00', 7, 7),
-(8, 'Oncology follow-up', '2024-12-08T10:30:00', 8, 8),
-(9, 'Psychiatry session', '2024-12-09T12:00:00', 9, 9),
-(10, 'General consultation', '2024-12-10T16:00:00', 10, 10);
-(11, 'Dental check-up', '2024-12-11T10:00:00', 11, 11),
-(12, 'Routine eye check', '2024-12-12T12:30:00', 12, 12),
-(13, 'General consultation', '2024-12-13T14:00:00', 13, 13),
-(14, 'Annual health exam', '2024-12-14T09:00:00', 14, 14),
-(15, 'Surgical follow-up', '2024-12-15T15:30:00', 15, 15),
-(16, 'Cardiology review', '2024-12-16T11:00:00', 16, 16),
-(17, 'Radiology session', '2024-12-17T13:00:00', 17, 17),
-(18, 'Orthopedics appointment', '2024-12-18T16:00:00', 18, 18),
-(19, 'Psychiatry follow-up', '2024-12-19T08:30:00', 19, 19),
-(20, 'General check-up', '2024-12-20T10:00:00', 20, 20);
--- Medical Treatment data
-INSERT INTO medical_treatment (id, description, type) VALUES
-(1, 'Physical Therapy', 'PHYSICAL'),
-(2, 'Chemotherapy', 'CHEMICAL'),
-(3, 'Psychological Therapy', 'PSYCHOLOGICAL'),
-(4, 'Surgery', 'SURGICAL'),
-(5, 'Vaccination', 'PREVENTIVE'),
-(6, 'Radiation Therapy', 'RADIATION'),
-(7, 'Occupational Therapy', 'REHABILITATION'),
-(8, 'Cardiac Rehabilitation', 'CARDIOLOGICAL'),
-(9, 'Pain Management', 'PAIN_RELIEF'),
-(10, 'Nutritional Counseling', 'DIETARY');
-(11, 'Dental Cleaning', 'DENTAL'),
-(12, 'Vision Correction', 'OPTICAL'),
-(13, 'Annual Blood Test', 'LABORATORY'),
-(14, 'Physical Rehab', 'REHABILITATION'),
-(15, 'Chiropractic Therapy', 'MANUAL'),
-(16, 'Cancer Screening', 'DIAGNOSTIC'),
-(17, 'Spinal Therapy', 'SURGICAL'),
-(18, 'Mental Health Session', 'PSYCHOLOGICAL'),
-(19, 'Hearing Test', 'AUDIOLOGICAL'),
-(20, 'Nutritional Program', 'DIETARY');
+insert into address (id, address_line1, address_line2, city, postal_code) values (1, 'ulica Dębowa', '12A', 'Warszawa', '00-001');
+insert into address (id, address_line1, address_line2, city, postal_code) values (2, 'ulica Lipowa', '34B', 'Kraków', '30-002');
+insert into address (id, address_line1, address_line2, city, postal_code) values (3, 'ulica Sosnowa', '7C', 'Poznań', '60-003');
+insert into address (id, address_line1, address_line2, city, postal_code) values (4, 'ulica Klonowa', '19', 'Gdańsk', '80-004');
+insert into address (id, address_line1, address_line2, city, postal_code) values (5, 'ulica Akacjowa', '5A', 'Wrocław', '50-005');
+insert into address (id, address_line1, address_line2, city, postal_code) values (6, 'ulica Wiśniowa', '22', 'Łódź', '90-006');
+insert into address (id, address_line1, address_line2, city, postal_code) values (7, 'ulica Kasztanowa', '33B', 'Szczecin', '70-007');
+insert into address (id, address_line1, address_line2, city, postal_code) values (8, 'ulica Świerkowa', '10', 'Bydgoszcz', '85-008');
+insert into address (id, address_line1, address_line2, city, postal_code) values (9, 'ulica Wierzbowa', '4D', 'Lublin', '20-009');
+
+insert into doctor (id, doctor_number, email, first_name, last_name, specialization, telephone_number, address_id) values (1, 'DOC1001', 'john.smith@example.com', 'John', 'Smith', 'GP', '+48123456701', 1);
+insert into doctor (id, doctor_number, email, first_name, last_name, specialization, telephone_number, address_id) values (2, 'DOC1002', 'anna.brown@example.com', 'Anna', 'Brown', 'DERMATOLOGIST', '+48123456702', 2);
+insert into doctor (id, doctor_number, email, first_name, last_name, specialization, telephone_number, address_id) values (3, 'DOC1003', 'peter.white@example.com', 'Peter', 'White', 'SURGEON', '+48123456703', 3);
+
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (1, 'PAT1001', '1985-03-25', 'adam.nowak@example.com', 'Adam', 'MALE', 'Nowak', '+48123456781', 4);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (2, 'PAT1002', '1992-07-14', 'ewa.kowalska@example.com', 'Ewa', 'FEMALE', 'Kowalska', '+48123456782', 5);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (3, 'PAT1003', '1978-11-02', 'marek.wisniewski@example.com', 'Marek', 'MALE', 'Wiśniewski', '+48123456783', 6);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (4, 'PAT1004', '2000-01-18', 'anna.zielinska@example.com', 'Anna', 'FEMALE', 'Zielińska', '+48123456784', 7);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (5, 'PAT1005', '1969-06-09', 'jan.kowalski@example.com', 'Jan', 'MALE', 'Kowalski', '+48123456785', 8);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (6, 'PAT1006', '1988-10-30', 'magdalena.nowak@example.com', 'Magdalena', 'FEMALE', 'Nowak', '+48123456786', 9);
+
+insert into visit (id, description, time, doctor_id, patient_id) values (1, 'Routine checkup', '2024-12-05 09:00:00', 1, 1);
+insert into visit (id, description, time, doctor_id, patient_id) values (2, 'Follow-up appointment', '2024-12-05 09:30:00', 2, 2);
+insert into visit (id, description, time, doctor_id, patient_id) values (3, 'Dermatology consultation', '2024-12-05 10:00:00', 3, 3);
+insert into visit (id, description, time, doctor_id, patient_id) values (4, 'Eye examination', '2024-12-05 10:30:00', 1, 4);
+insert into visit (id, description, time, doctor_id, patient_id) values (5, 'Surgery follow-up', '2024-12-05 11:00:00', 2, 5);
+insert into visit (id, description, time, doctor_id, patient_id) values (6, 'Routine checkup', '2024-12-05 11:30:00', 3, 6);
+insert into visit (id, description, time, doctor_id, patient_id) values (7, 'General consultation', '2024-12-05 12:00:00', 1, 6);
+insert into visit (id, description, time, doctor_id, patient_id) values (8, 'Skin rash diagnosis', '2024-12-05 12:30:00', 2, 5);
+insert into visit (id, description, time, doctor_id, patient_id) values (9, 'Eye strain consultation', '2024-12-05 13:00:00', 3, 4);
+insert into visit (id, description, time, doctor_id, patient_id) values (10, 'Post-surgery review', '2024-12-05 13:30:00', 1, 3);
+insert into visit (id, description, time, doctor_id, patient_id) values (11, 'Routine checkup', '2024-12-05 14:00:00', 1, 2);
+insert into visit (id, description, time, doctor_id, patient_id) values (12, 'Follow-up appointment', '2024-12-05 14:30:00', 2, 1);
+insert into visit (id, description, time, doctor_id, patient_id) values (13, 'Dermatology consultation', '2024-12-05 15:00:00', 2, 1);
+insert into visit (id, description, time, doctor_id, patient_id) values (14, 'Eye examination', '2024-12-05 15:30:00', 2, 4);
+insert into visit (id, description, time, doctor_id, patient_id) values (15, 'Surgery follow-up', '2024-12-05 16:00:00', 3, 5);
+insert into visit (id, description, time, doctor_id, patient_id) values (16, 'Routine checkup', '2024-12-06 09:00:00', 3, 6);
+insert into visit (id, description, time, doctor_id, patient_id) values (17, 'General consultation', '2024-12-06 09:30:00', 3, 2);
+insert into visit (id, description, time, doctor_id, patient_id) values (18, 'Skin rash diagnosis', '2024-12-06 10:00:00', 3, 1);
+
+insert into medical_treatment (id, description, type, visit_id) values (1, 'Ultrasound of the abdomen', 'USG', 1);
+insert into medical_treatment (id, description, type, visit_id) values (2, 'Chest X-ray', 'RTG', 4);
+insert into medical_treatment (id, description, type, visit_id) values (3, 'Electrocardiogram', 'EKG', 13);
+insert into medical_treatment (id, description, type, visit_id) values (4, 'Ultrasound of the thyroid', 'USG', 18);
+insert into medical_treatment (id, description, type, visit_id) values (5, 'Chest X-ray', 'RTG', 5);
+insert into medical_treatment (id, description, type, visit_id) values (6, 'Electrocardiogram', 'EKG', 17);
+insert into medical_treatment (id, description, type, visit_id) values (7, 'Ultrasound of the pelvis', 'USG', 8);
+insert into medical_treatment (id, description, type, visit_id) values (8, 'Chest X-ray with lateral view', 'RTG', 7);
+insert into medical_treatment (id, description, type, visit_id) values (9, 'Stress test EKG', 'EKG', 5);
+insert into medical_treatment (id, description, type, visit_id) values (10, 'Doppler ultrasound of the legs', 'USG', 3);

@@ -1,7 +1,6 @@
 package com.jpacourse.persistence.entity;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -23,15 +22,25 @@ public class AddressEntity {
 	@Column(nullable = false)
 	private String postalCode;
 
-	//	relacje jednostronne - adres nie wie kto pod nim mieszka, ale osoby wiedzą gdzie mieszkają
-	//  jednostronne ponieważ użyto mappedBy dla OneToOne - tylko pomoc dla kompilatora,
-	//  tych zmiennych tu "nie powinno być"
-	@OneToOne(mappedBy = "address")
+	// Jednostronna relacja - adres nie wie, kto pod nim mieszka
+	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, optional = true)
 	private DoctorEntity doctorResident;
 
-	@OneToOne(mappedBy = "address")
+	@OneToOne(mappedBy = "address", cascade = CascadeType.ALL, optional = true)
 	private PatientEntity patientResident;
 
+	// Constructors
+	public AddressEntity() {
+	}
+
+	public AddressEntity(String city, String addressLine1, String addressLine2, String postalCode) {
+		this.city = city;
+		this.addressLine1 = addressLine1;
+		this.addressLine2 = addressLine2;
+		this.postalCode = postalCode;
+	}
+
+	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -72,7 +81,6 @@ public class AddressEntity {
 		this.postalCode = postalCode;
 	}
 
-
 	public DoctorEntity getDoctorResident() {
 		return doctorResident;
 	}
@@ -87,5 +95,16 @@ public class AddressEntity {
 
 	public void setPatientResident(PatientEntity patientResident) {
 		this.patientResident = patientResident;
+	}
+
+	@Override
+	public String toString() {
+		return "AddressEntity{" +
+				"id=" + id +
+				", city='" + city + '\'' +
+				", addressLine1='" + addressLine1 + '\'' +
+				", addressLine2='" + addressLine2 + '\'' +
+				", postalCode='" + postalCode + '\'' +
+				'}';
 	}
 }

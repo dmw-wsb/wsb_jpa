@@ -3,7 +3,7 @@ package com.jpacourse.persistence.entity;
 import com.jpacourse.persistence.enums.Specialization;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,15 +33,28 @@ public class DoctorEntity {
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
 
-	//  relacja dwustronna
+	// Relacja dwustronna z wizytami
 	@OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-//	@JoinColumn(name = "DOCTOR_ID")
-	private List<VisitEntity> visits;
+	private List<VisitEntity> visits = new ArrayList<>();
 
-	//	relacje jednostronna - adres nie wie kto pod nim mieszka, ale osoby wiedzą gdzie mieszkają
+	// Relacja jednostronna z adresem
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private AddressEntity address;
 
+	// Constructors
+	public DoctorEntity() {
+	}
+
+	public DoctorEntity(String firstName, String lastName, String telephoneNumber, String email, String doctorNumber, Specialization specialization) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.telephoneNumber = telephoneNumber;
+		this.email = email;
+		this.doctorNumber = doctorNumber;
+		this.specialization = specialization;
+	}
+
+	// Getters and Setters
 	public Long getId() {
 		return id;
 	}
@@ -112,5 +125,29 @@ public class DoctorEntity {
 
 	public void setVisits(List<VisitEntity> visits) {
 		this.visits = visits;
+	}
+
+	// Helper methods for managing visits
+	public void addVisit(VisitEntity visit) {
+		visits.add(visit);
+		visit.setDoctor(this);
+	}
+
+	public void removeVisit(VisitEntity visit) {
+		visits.remove(visit);
+		visit.setDoctor(null);
+	}
+
+	@Override
+	public String toString() {
+		return "DoctorEntity{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", telephoneNumber='" + telephoneNumber + '\'' +
+				", email='" + email + '\'' +
+				", doctorNumber='" + doctorNumber + '\'' +
+				", specialization=" + specialization +
+				'}';
 	}
 }
