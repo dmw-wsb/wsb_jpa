@@ -46,6 +46,9 @@ public class PatientEntity {
 	//	relacje jednostronna - adres nie wie kto pod nim mieszka, ale osoby wiedzą gdzie mieszkają
 	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private AddressEntity address;
+	@Version
+	private int version;
+
 
 	public Long getId() {
 		return id;
@@ -126,4 +129,6 @@ public class PatientEntity {
 	public void setVisits(List<VisitEntity> visits) {
 		this.visits = visits;
 	}
+
+
 }

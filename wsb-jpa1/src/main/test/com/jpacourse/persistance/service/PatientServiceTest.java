@@ -112,5 +112,10 @@ public class PatientServiceTest
         assertThat(visits.get(3).getId()).isEqualTo(18L);
         assertThat(visits.get(3).getDoctor().getId()).isEqualTo(3L);
     }
+    @Test
+    public void testFindVisitsByPatientId() {
+        List<VisitEntity> visits = patientService.findVisitsByPatientId(1L);
+        assertFalse(visits.isEmpty());
+    }
 
 }

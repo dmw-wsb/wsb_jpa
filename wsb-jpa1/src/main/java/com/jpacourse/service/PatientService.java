@@ -11,4 +11,6 @@ public interface PatientService {
     public void deleteById(final Long id);
 
     public List<VisitEntity> findVisitsOfPatient(final Long id);
+
+    List<VisitEntity> findVisitsByPatientId(Long patientId);
 }

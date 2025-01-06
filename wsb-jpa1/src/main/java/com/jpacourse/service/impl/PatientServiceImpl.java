@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -40,4 +41,10 @@ public class PatientServiceImpl implements PatientService
         final PatientEntity entity = patientDao.findOne(id);
         return entity.getVisits();
     }
+    @Override
+    public List<VisitEntity> findVisitsByPatientId(Long patientId) {
+        PatientEntity patient = patientDao.findOne(patientId);
+        return patient != null ? patient.getVisits() : Collections.emptyList();
+    }
+
 }

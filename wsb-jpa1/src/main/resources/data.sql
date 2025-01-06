@@ -12,12 +12,18 @@ insert into doctor (id, doctor_number, email, first_name, last_name, specializat
 insert into doctor (id, doctor_number, email, first_name, last_name, specialization, telephone_number, address_id) values (2, 'DOC1002', 'anna.brown@example.com', 'Anna', 'Brown', 'DERMATOLOGIST', '+48123456702', 2);
 insert into doctor (id, doctor_number, email, first_name, last_name, specialization, telephone_number, address_id) values (3, 'DOC1003', 'peter.white@example.com', 'Peter', 'White', 'SURGEON', '+48123456703', 3);
 
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (1, 'PAT1001', '1985-03-25', 'adam.nowak@example.com', 'Adam', 'MALE', 'Nowak', '+48123456781', 4);
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (2, 'PAT1002', '1992-07-14', 'ewa.kowalska@example.com', 'Ewa', 'FEMALE', 'Kowalska', '+48123456782', 5);
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (3, 'PAT1003', '1978-11-02', 'marek.wisniewski@example.com', 'Marek', 'MALE', 'Wiśniewski', '+48123456783', 6);
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (4, 'PAT1004', '2000-01-18', 'anna.zielinska@example.com', 'Anna', 'FEMALE', 'Zielińska', '+48123456784', 7);
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (5, 'PAT1005', '1969-06-09', 'jan.kowalski@example.com', 'Jan', 'MALE', 'Kowalski', '+48123456785', 8);
-insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id) values (6, 'PAT1006', '1988-10-30', 'magdalena.nowak@example.com', 'Magdalena', 'FEMALE', 'Nowak', '+48123456786', 9);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (1, 'PAT1001', '1985-03-25', 'adam.nowak@example.com', 'Adam', 'MALE', 'Nowak', '+48123456781', 4, 0);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (2, 'PAT1002', '1992-07-14', 'ewa.kowalska@example.com', 'Ewa', 'FEMALE', 'Kowalska', '+48123456782', 5, 0);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (3, 'PAT1003', '1978-11-02', 'marek.wisniewski@example.com', 'Marek', 'MALE', 'Wiśniewski', '+48123456783', 6, 0);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (4, 'PAT1004', '2000-01-18', 'anna.zielinska@example.com', 'Anna', 'FEMALE', 'Zielińska', '+48123456784', 7, 0);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (5, 'PAT1005', '1969-06-09', 'jan.kowalski@example.com', 'Jan', 'MALE', 'Kowalski', '+48123456785', 8, 0);
+insert into patient (id, patient_number, date_of_birth, email, first_name, gender, last_name, telephone_number, address_id, version)
+values (6, 'PAT1006', '1988-10-30', 'magdalena.nowak@example.com', 'Magdalena', 'FEMALE', 'Nowak', '+48123456786', 9, 0);
 
 insert into visit (id, description, time, doctor_id, patient_id) values (1, 'Routine checkup', '2024-12-05 09:00:00', 1, 1);
 insert into visit (id, description, time, doctor_id, patient_id) values (2, 'Follow-up appointment', '2024-12-05 09:30:00', 2, 2);
