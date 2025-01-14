@@ -5,6 +5,8 @@
     <option name="originalFiles">
       <list>
         <option value="$PROJECT_DIR$/wsb_jpa/wsb-jpa1/pom.xml" />
+        <option value="$PROJECT_DIR$/wsb_jpa/wsb-jpa/pom.xml" />
+        <option value="$PROJECT_DIR$/wsb-jpa/pom.xml" />
       </list>
     </option>
   </component>
